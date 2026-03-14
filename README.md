@@ -99,4 +99,37 @@
     - Pentru `i` de la 0 la 9, se afișează toate valorile.
 - **Idee principală**: un vector este ca o stradă, iar casele de pe stradă sunt valorile vectorului , pentru a ajule la o casă trebuie să le accesezi prin indice (`[i]`).
 
+---
+
+## Clase (exemplu: Chitara)
+
+Gândindu-ne la o **chitară**: știm că are corzi, o cutie de rezonanță, o culoare, un model. În program, clasa este „rețeta” care spune ce are o chitară și ce poate face. Din această rețetă poți crea chitare concrete: una roșie cu 6 corzi, alta neagră cu 12 corzi etc.
+
+- **Ce este o clasă**  
+  Este șablonul (rețeta) unui tip de obiect. Descrie ce date are obiectul și ce acțiuni poate face. Din clasă faci obiecte reale: ex. clasa `Chitara`, obiecte `chitaraMea`, `chitaraTa`.
+
+- **Atribute**  
+  Sunt datele pe care le are fiecare obiect. La o chitară: câte corzi are, ce culoare are, cum se numește modelul. Fiecare chitară creată în program are propriile valori pentru aceste lucruri (ex: `nrCorzi`, `culoare`, `numeModel`).
+
+- **Public**  
+  Înseamnă că oricine poate folosi acel lucru. Ex: o metodă `canta()` publică – oricine poate apela `chitaraMea.canta()`. E ca un buton pe care îl poate apăsa oricine.
+
+- **Private**  
+  Înseamnă că doar interiorul clasei „vede” acel lucru. Din afară nu poți schimba direct, de exemplu, cum sunt setate corzile; doar metodele chitarei pot folosi sau modifica acele date. Te ajută să păstrezi lucrurile în ordine și să eviți modificări greșite.
+
+- **Constructor default**  
+  E constructorul fără parametri. Creezi o chitară fără să îi spui nimic: `Chitara c;`. Chitara există, dar cu valori implicite (sau neinițializate). Dacă nu scrii niciun constructor, compilatorul îți dă unul astfel automat.
+
+- **Constructor cu parametri**  
+  Creezi obiectul și îi dai de la început ce ai nevoie. Ex: `Chitara c(6, "rosu", "Fender");` – o chitară cu 6 corzi, roșie, model Fender. Constructorul primește aceste valori și le pune în atribute (nr corzi, culoare, nume model).
+
+- **Getter**  
+  E o metodă care **îți dă** o informație despre obiect, fără să schimbe nimic. Ex: „câte corzi are chitara?” – `getNrCorzi()` returnează 6. E ca să întrebi și să primești răspuns.
+
+- **Setter**  
+  E o metodă care **schimbă** o informație din obiect. Ex: „vreau să fie roșie” – `setCuloare("rosu")` pune culoarea la roșu. Poți verifica în setter (ex: să nu accepte un număr negativ de corzi) înainte să schimbi efectiv atributul.
+
+- **De ce getter și setter**  
+  Păstrezi atributele `private` (ascunse), iar lumea le folosește doar prin getter (să citească) și setter (să modifice). Așa controlezi cum se citesc și cum se schimbă datele, cu termeni simpli: „întrebi” cu getter, „comanzi” cu setter.
+
 
