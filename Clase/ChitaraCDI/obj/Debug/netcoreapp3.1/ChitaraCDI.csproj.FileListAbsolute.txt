@@ -1,0 +1,13 @@
+C:\Users\HIS\source\repos\ChitaraCDI\ChitaraCDI\bin\Debug\netcoreapp3.1\ChitaraCDI.exe
+C:\Users\HIS\source\repos\ChitaraCDI\ChitaraCDI\bin\Debug\netcoreapp3.1\ChitaraCDI.deps.json
+C:\Users\HIS\source\repos\ChitaraCDI\ChitaraCDI\bin\Debug\netcoreapp3.1\ChitaraCDI.runtimeconfig.json
+C:\Users\HIS\source\repos\ChitaraCDI\ChitaraCDI\bin\Debug\netcoreapp3.1\ChitaraCDI.runtimeconfig.dev.json
+C:\Users\HIS\source\repos\ChitaraCDI\ChitaraCDI\bin\Debug\netcoreapp3.1\ChitaraCDI.dll
+C:\Users\HIS\source\repos\ChitaraCDI\ChitaraCDI\bin\Debug\netcoreapp3.1\ChitaraCDI.pdb
+C:\Users\HIS\source\repos\ChitaraCDI\ChitaraCDI\obj\Debug\netcoreapp3.1\ChitaraCDI.csproj.AssemblyReference.cache
+C:\Users\HIS\source\repos\ChitaraCDI\ChitaraCDI\obj\Debug\netcoreapp3.1\ChitaraCDI.AssemblyInfoInputs.cache
+C:\Users\HIS\source\repos\ChitaraCDI\ChitaraCDI\obj\Debug\netcoreapp3.1\ChitaraCDI.AssemblyInfo.cs
+C:\Users\HIS\source\repos\ChitaraCDI\ChitaraCDI\obj\Debug\netcoreapp3.1\ChitaraCDI.csproj.CoreCompileInputs.cache
+C:\Users\HIS\source\repos\ChitaraCDI\ChitaraCDI\obj\Debug\netcoreapp3.1\ChitaraCDI.dll
+C:\Users\HIS\source\repos\ChitaraCDI\ChitaraCDI\obj\Debug\netcoreapp3.1\ChitaraCDI.pdb
+C:\Users\HIS\source\repos\ChitaraCDI\ChitaraCDI\obj\Debug\netcoreapp3.1\ChitaraCDI.genruntimeconfig.cache
