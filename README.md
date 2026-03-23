@@ -133,3 +133,151 @@ Gândindu-ne la o **chitară**: știm că are corzi, o cutie de rezonanță, o c
   Păstrezi atributele `private` (ascunse), iar lumea le folosește doar prin getter (să citească) și setter (să modifice). Așa controlezi cum se citesc și cum se schimbă datele, cu termeni simpli: „întrebi” cu getter, „comanzi” cu setter.
 
 
+
+---
+
+## Desktop Dev - WinForms (QR WiFi)
+
+În folderul `Desktop/WinForms/QR_WiFi` este o aplicație desktop făcută cu Windows Forms care generează un cod QR pentru conectare la WiFi.
+
+### Ce face aplicația
+
+- Primește de la utilizator:
+  - `SSID` (numele rețelei) din `tbSsid`
+  - `Password` din `tbPass`
+- La click pe butonul `Generate`, construiește textul standard WiFi:
+  - `WIFI:T:WPA;S:{ssid};P:{pass};;`
+- Textul este transformat în cod QR cu biblioteca `QRCoder`.
+- QR-ul este:
+  - afișat în aplicație în `PictureBox` (`pbQrCode`)
+  - salvat ca fișier `.png` pe disk.
+
+### Cum funcționează pas cu pas
+
+- **1. Luare text din TextBox**
+  - `string ssid = tbSsid.Text;`
+  - `string pass = tbPass.Text;`
+- **2. Construire payload WiFi**
+  - Se face un string în formatul înțeles de telefoane pentru conectare rapidă la WiFi prin scanare.
+- **3. Generare QR**
+  - `QRCodeGenerator` creează datele QR.
+  - `BitmapByteQRCode` face un bitmap (imagine) din acele date.
+- **4. Validare**
+  - Se verifică dacă `ssid` sau `pass` sunt goale/albe.
+  - În implementarea curentă condiția este cu `||` (OR), adică merge pe ramura de succes dacă cel puțin una dintre valori este completată.
+  - Dacă validarea trece, status-ul devine verde (`Success!`), altfel roșu (`SSID or pass empty!`).
+- **5. Afișare imagine în aplicație**
+  - `pbQrCode.Image = new Bitmap(bitmap, pbQrCode.Size);`
+  - Asta redimensionează QR-ul la dimensiunea zonei `PictureBox`, ca să fie vizibil direct în UI.
+- **6. Salvare PNG**
+  - `bitmap.Save($"../../../{ssid}_qr.png", ImageFormat.Png);`
+  - Se salvează imaginea cu numele rețelei, de exemplu `MyWifi_qr.png`.
+
+### Ce înseamnă `../../../` și de ce îl folosim
+
+- `../` înseamnă „urcă un folder mai sus”.
+- `../../../` înseamnă „urcă 3 foldere”.
+- În WinForms, la rulare, calea curentă este de obicei în `bin/Debug/...` sau `bin/Release/...`.
+- Dacă ai salva direct fără `../../../`, fișierul ar ajunge în acel folder de build.
+- Cu `../../../`, urci din folderul de build spre folderul proiectului, ca PNG-ul să fie salvat într-un loc mai ușor de găsit în proiect.
+
+### Elemente UI folosite în proiect
+
+- `TextBox`: `tbSsid`, `tbPass` pentru input.
+- `Button`: `btnGenerate` pentru pornirea generării.
+- `Label`: `lblStatus` pentru feedback de succes/eroare.
+- `PictureBox`: `pbQrCode` pentru preview-ul imaginii QR în fereastră.
+
+---
+
+## Clean code - naming si conventii
+
+### Ce face `string.IsNullOrWhiteSpace(ssid)`
+
+- Verifica daca stringul `ssid` este:
+  - `null` (nu are valoare),
+  - gol (`""`),
+  - sau contine doar spatii/tab-uri/newline.
+- Practic este o validare rapida de input.
+- E mai sigur decat sa verifici doar `ssid == ""`, pentru ca acopera mai multe cazuri reale.
+
+### Ce face `lblStatus.ForeColor = Color.Red;`
+
+- `lblStatus` este un control de tip `Label`.
+- `ForeColor` este culoarea textului afisat de acel label.
+- `Color.Red` coloreaza textul in rosu, de obicei pentru mesaj de eroare.
+- In acelasi mod, `Color.Green` sugereaza succes.
+
+### De ce folosim `lblStatus`
+
+- Aplicatia are nevoie de feedback vizual pentru utilizator.
+- `lblStatus` este locul unde afisam starea curenta: succes sau eroare.
+- Utilizatorul vede imediat ce s-a intamplat dupa click pe buton, fara sa deschida loguri sau consola.
+
+### Logica numelor in WinForms: tip control + rol
+
+In WinForms, de multe ori numele controlului urmeaza modelul:
+
+- prefix de tip control + nume descriptiv al rolului
+
+Exemple din proiect:
+
+- `lblStatus` = `lbl` (Label) + `Status` (ce arata)
+- `tbSsid` = `tb` (TextBox) + `Ssid` (ce citeste)
+- `btnGenerate` = `btn` (Button) + `Generate` (ce actiune face)
+- `pbQrCode` = `pb` (PictureBox) + `QrCode` (ce afiseaza)
+
+Avantaj: cand citesti codul, vezi rapid si tipul controlului, si scopul lui.
+
+### Diferenta intre PascalCase si camelCase
+
+- `PascalCase`:
+  - Fiecare cuvant incepe cu litera mare.
+  - Exemple: `Form1`, `GenerateQrCode`, `UserName`.
+  - Folosit des in C# pentru clase, metode, proprietati.
+
+- `camelCase`:
+  - Primul cuvant incepe cu litera mica, urmatoarele cu litera mare.
+  - Exemple: `ssidValue`, `userName`, `totalCount`.
+  - Folosit des pentru variabile locale si parametri.
+
+### Alte stiluri de scriere nume
+
+- `snake_case`:
+  - Cuvintele sunt separate cu `_`, toate litere mici.
+  - Exemplu: `user_name`.
+  - Folosit des in C/C++ (in unele proiecte), Python, C.
+
+- `UPPER_SNAKE_CASE`:
+  - Litere mari + `_`.
+  - Exemplu: `MAX_BUFFER_SIZE`.
+  - Folosit de obicei pentru constante/macrouri.
+
+- `kebab-case`:
+  - Cuvintele separate cu `-`.
+  - Exemplu: `user-name`.
+  - Nu este valid pentru identificatori in C/C++/C# (minusul e operator).
+  - E folosit mai mult in URL-uri, fisiere, CSS.
+
+### Ce este Altman si ce nu este
+
+- `Altman style` este un stil de formatare pentru acolade.
+- Exemplu Altman:
+
+`if (x > 0)`
+`{`
+`    // cod`
+`}`
+
+- Deci:
+  - `PascalCase` / `camelCase` / `snake_case` = stiluri de nume
+  - `Altman` / `K&R` / `Allman` = stiluri de pozitionare a acoladelor
+
+### Recomandare simpla pentru inceput
+
+- Alege o conventie si ramai consecvent.
+- Pentru C#:
+  - clase/metode/proprietati: `PascalCase`
+  - variabile locale/parametri: `camelCase`
+  - controale WinForms: prefix tip + nume descriptiv (`tbName`, `btnSave`, `lblError`)
+
